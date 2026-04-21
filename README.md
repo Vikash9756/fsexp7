@@ -1,7 +1,7 @@
 # Full Stack Experiments
 
-**Name:** Sujal Gulati  
-**UID:** 24BDA70318
+**Name:** Vikash yadav
+**UID:** 25BDS80002
 
 ---
 
@@ -87,6 +87,6 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/sujalgulati8059-droid/fsexp7.git
+git remote add origin https://github.com/vikash9756-droid/fsexp7.git
 git push -u origin main
 ```
