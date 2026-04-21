@@ -9,7 +9,7 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
         setProducts(response.data);
         setError('');
       } catch (err) {
@@ -64,8 +64,8 @@ const ProductList = () => {
                 onClick={async () => {
                     setLoading(true);
                     try {
-                        await axios.post('http://localhost:5000/api/seed');
-                        const res = await axios.get('http://localhost:5000/api/products');
+                        await axios.post(`${import.meta.env.VITE_API_URL}/api/seed`);
+                        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
                         setProducts(res.data);
                         setError('');
                     } catch(err) {
