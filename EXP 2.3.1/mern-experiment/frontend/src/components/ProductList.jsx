@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+
+const STATIC_PRODUCTS = [
+  { _id: '1', name: 'Wireless Headphones', price: 99, description: 'High quality audio.', imageUrl: 'https://via.placeholder.com/150' },
+  { _id: '2', name: 'Mechanical Keyboard', price: 120, description: 'Clicky switches.', imageUrl: 'https://via.placeholder.com/150' },
+  { _id: '3', name: 'Gaming Mouse', price: 50, description: 'RGB lighting.', imageUrl: 'https://via.placeholder.com/150' },
+];
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
-        setProducts(response.data);
-        setError('');
-      } catch (err) {
-        setError('Error fetching products from server. Please make sure the backend is running and the database is connected.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const [products] = useState(STATIC_PRODUCTS);
+  const loading = false;
+  const error = '';
 
   return (
     <div className="container mt-5">
@@ -56,27 +45,6 @@ const ProductList = () => {
               </div>
             </div>
           ))}
-          {products.length === 0 && (
-            <div className="col-12 text-center text-muted">
-              <p>No products available. Database might need seeding.</p>
-              <button 
-                className="btn btn-outline-primary mt-2 shadow-sm" 
-                onClick={async () => {
-                    setLoading(true);
-                    try {
-                        await axios.post(`${import.meta.env.VITE_API_URL}/api/seed`);
-                        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`);
-                        setProducts(res.data);
-                        setError('');
-                    } catch(err) {
-                        setError('Failed to seed database.');
-                    }
-                    setLoading(false);
-                }}>
-                Seed Database
-              </button>
-            </div>
-          )}
         </div>
       )}
     </div>
